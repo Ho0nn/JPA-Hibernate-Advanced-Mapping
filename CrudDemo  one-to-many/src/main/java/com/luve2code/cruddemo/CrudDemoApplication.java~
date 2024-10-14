@@ -40,6 +40,7 @@ public class CrudDemoApplication {
         //find courses for instructor
         List<Course> courses = appDAO.findCoursesByInstructorId(id);
         instructor.setCourses(courses);
+
         System.out.println("Courses associated to Instructor : "+instructor.getCourses());
         System.out.println("Done 🥳!");
     }
