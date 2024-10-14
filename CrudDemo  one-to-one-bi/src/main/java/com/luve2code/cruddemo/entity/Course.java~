@@ -1,0 +1,18 @@
+package com.luve2code.cruddemo.entity;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "course")
+public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "title")
+    private String title;
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH,
+            CascadeType.DETACH,CascadeType.PERSIST}) 
+    private Instructor instructor;
+
+}
