@@ -3,7 +3,6 @@ package com.luve2code.cruddemo.dao;
 import com.luve2code.cruddemo.entity.Course;
 import com.luve2code.cruddemo.entity.Instructor;
 import com.luve2code.cruddemo.entity.InstructorDetail;
-import com.luve2code.cruddemo.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
@@ -131,53 +130,5 @@ public class AppDAOImpl implements AppDAO{
         // execute query
         Course course = query.getSingleResult();
         return course;
-    }
-
-    @Override
-    public Course findCourseAndStudentsByCourseId(int id) {
-
-        // create query
-        TypedQuery<Course>query=entityManager.createQuery(
-                "select c from Course c " +
-                        "JOIN FETCH c.students " +
-                        "where c.id =:data",Course.class);
-        query.setParameter("data",id);
-
-        // execute query
-        Course course = query.getSingleResult();
-
-        return course;
-    }
-
-    @Override
-    public Student findStudentAndCoursesByStudentId(int id) {
-
-        // create query
-        TypedQuery<Student>query=entityManager.createQuery(
-            "SELECT s from Student s " +
-                    "JOIN FETCH s.courses " +
-                    "where s.id=:data",Student.class);
-        query.setParameter("data",id);
-
-        // execute query
-        Student student = query.getSingleResult();
-
-        return student;
-    }
-
-    @Override
-    @Transactional
-    public void update(Student student) {
-        entityManager.merge(student);
-    }
-
-    @Override
-    @Transactional
-    public void deletStudentById(int id) {
-        // retrieve the student
-        Student student=findStudentAndCoursesByStudentId(id);
-
-        // delete the student
-        entityManager.remove(student);
     }
 }

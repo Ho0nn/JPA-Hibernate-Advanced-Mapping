@@ -1,7 +1,6 @@
 package com.luve2code.cruddemo.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Fetch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,8 @@ public class Course {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST,
+    @ManyToOne(cascade = {
+            CascadeType.MERGE,CascadeType.PERSIST,
             CascadeType.DETACH,CascadeType.REFRESH})
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
@@ -26,19 +26,6 @@ public class Course {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id")
     private List<Review> reviews;
-
-
-    @ManyToMany(fetch=FetchType.LAZY,
-            cascade = {CascadeType.REFRESH,CascadeType.DETACH,
-            CascadeType.MERGE,CascadeType.PERSIST})
-    @JoinTable(
-            name = "course_student",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id")
-    )
-    private List<Student>students;
-
-
 
 
     public Course() {
@@ -84,21 +71,6 @@ public class Course {
         if (reviews==null)
             reviews=new ArrayList<>();
         reviews.add(review);
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-    // add a convenience method
-    public void addStudent(Student student){
-        if (students==null)
-            students=new ArrayList<>();
-        students.add(student);
     }
 
     @Override

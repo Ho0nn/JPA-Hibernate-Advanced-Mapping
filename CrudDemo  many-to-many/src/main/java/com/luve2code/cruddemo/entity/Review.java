@@ -14,9 +14,8 @@ public class Review {
     @Column(name ="comment")
     private String comment;
 
-
-
-
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    private Course course;
 
    public Review(){}
 
@@ -40,7 +39,13 @@ public class Review {
         this.comment = comment;
     }
 
-
+//    public Course getCourse() {
+//        return course;
+//    }
+//
+//    public void setCourse(Course course) {
+//        this.course = course;
+//    }
 
     @Override
     public String toString() {
