@@ -119,7 +119,7 @@ public class AppDAOImpl implements AppDAO{
     }
 
     @Override
-    public Course finndCourseAndReviewsByCourseId(int id) {
+    public Course findCourseAndReviewsByCourseId(int id) {
         // create query
         TypedQuery<Course>query=entityManager.createQuery(
                 "select c from Course c " +

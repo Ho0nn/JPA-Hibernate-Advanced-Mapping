@@ -23,15 +23,28 @@ public class CrudDemoApplication {
         return runner->{
 
 //            createCourseAndReviews(appDAO);
-            retrieveCourseAndReviews(appDAO);
+//            retrieveCourseAndReviews(appDAO);
+            deleteCourseAndReviews(appDAO);
+            
         };
+    }
+
+    private void deleteCourseAndReviews(AppDAO appDAO) {
+
+        int id=10;
+        System.out.println("Deleting Course with id :"+ id +" and its reviews...");
+        // delete the course
+        appDAO.deleteCourseById(id);
+
+        // print the course
+        System.out.println("Course with id :"+ id +" was Deleted Successfully🥳!");
     }
 
     private void retrieveCourseAndReviews(AppDAO appDAO) {
 
         // get the course and reviews
         int id=10;
-        Course course= appDAO.finndCourseAndReviewsByCourseId(id);
+        Course course= appDAO.findCourseAndReviewsByCourseId(id);
 
         // print the course
         System.out.println(course);
@@ -40,7 +53,6 @@ public class CrudDemoApplication {
         System.out.println(course.getReviews());
 
         System.out.println("Done🤩!");
-
 
     }
 
