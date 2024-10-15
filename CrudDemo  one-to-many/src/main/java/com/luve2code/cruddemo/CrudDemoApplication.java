@@ -22,13 +22,58 @@ public class CrudDemoApplication {
         return runner->{
 //           createInstructor(appDAO);
 //            findInstructor(appDAO);
-//            deleteById(appDAO);
+//            deleteInstructor(appDAO);
 //            findInstructorDetail(appDAO);
 //            deleteInstructorDetail(appDAO);
 //            createInstructorWithCourses(appDAO);
 //            findInstructorWithCourses(appDAO);
-              findCoursesForInstructor(appDAO);
+//            findCoursesForInstructor(appDAO);
+//            findInstructorWithCoursesJoinFetch(appDAO);
+//            updateInstructor(appDAO);
+//            updateCourse(appDAO);
+            deleteCourse(appDAO);
         };
+    }
+
+    private void deleteCourse(AppDAO appDAO) {
+        int id=10;
+        appDAO.deleteCourseById(id);
+        System.out.println("Course with id :"+ id +" was Deleted Successfully! ");
+    }
+
+    private void updateCourse(AppDAO appDAO) {
+
+       // find the course
+        int id= 10;
+        Course course= appDAO.findCourseById(id);
+
+        // update course
+        course.setTitle("Servlet");
+        appDAO.update(course);
+        System.out.println("Done🤩!");
+
+
+    }
+
+    private void updateInstructor(AppDAO appDAO) {
+        int id=3;
+        Instructor instructor = appDAO.findInstructorById(id);
+
+        // update instructor data
+        instructor.setFirstName("Hanin");
+
+        appDAO.update(instructor);
+    }
+
+    private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
+        int id=1;
+
+        //find instructor
+        Instructor instructor=appDAO.findInstructorByIdJoinFetch(id);
+        System.out.println("The Instructor : "+ instructor);
+        System.out.println("associated courses : "+ instructor.getCourses());
+
+
     }
 
     private void findCoursesForInstructor(AppDAO appDAO) {
@@ -96,15 +141,15 @@ public class CrudDemoApplication {
 
     }
 
-    private void deleteById(AppDAO appDAO) {
-        int id = 2;
-        appDAO.deleteById(id);
+    private void deleteInstructor(AppDAO appDAO) {
+        int id = 3;
+        appDAO.deleteInstructorById(id);
         System.out.println("Instructor was Deleted Successfully !");
 
     }
 
     private void findInstructor(AppDAO appDAO) {
-        int id =2;
+        int id =1;
         Instructor instructor=appDAO.findInstructorById(id);
         System.out.println("Instructor : "+ instructor);
         System.out.println("Instructor Details: "+instructor.getInstructorDetail());
